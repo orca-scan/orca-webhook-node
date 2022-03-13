@@ -1,4 +1,4 @@
-# orca-webhook-python
+# orca-webhook-node
 
 Example of how to build an [Orca Scan WebHook](https://orcascan.com/docs/api/webhooks) endpoint in using [NodeJS](https://nodejs.org/) and [express](https://expressjs.com/) framework.
 
