@@ -1,4 +1,5 @@
 const express = require('express');
+const axios = require('axios');
 
 const app = express();
 // Parse JSON bodies for this app.
@@ -40,4 +41,28 @@ app.post('*', function(request, response){
     response.sendStatus(200);
 });
 
+async function webhook_in(){
+    // The following example adds a new row to a sheet, setting the value of Barcode, Name, Quantity and Description
+    // TODO: change url to https://api.orcascan.com/sheets/{id}
+    const json = JSON.stringify(
+            { 
+                "___orca_action": "add",
+                "Barcode": "0123456789",
+                "Name": "New 1",
+                "Quantity": 12,
+                "Description": "Add new row example"
+            }
+        );
+    const res = await axios.post("https://httpbin.org/post", json, {
+      headers: {
+        // Overwrite Axios's automatically set Content-Type
+        'Content-Type': 'application/json'
+      }
+    });
+    
+    res.data.data;
+    console.log(res.data.data);
+}
+
+webhook_in()
 app.listen(3000, () => console.log('Example app is listening on port 3000.'));

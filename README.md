@@ -105,15 +105,45 @@ app.post('*', function(request, response){
 
 app.listen(3000, () => console.log('Example app is listening on port 3000.'));
 ```
+### WebHook In 
+
+[Orca Scan WebHook In](https://orcascan.com/guides/how-to-update-orca-scan-from-your-system-4b249706)
+
+```js
+async function webhook_in(){
+    // The following example adds a new row to a sheet, setting the value of Barcode, Name, Quantity and Description
+    // TODO: change url to https://api.orcascan.com/sheets/{id}
+    const json = JSON.stringify(
+            { 
+                "___orca_action": "add",
+                "Barcode": "0123456789",
+                "Name": "New 1",
+                "Quantity": 12,
+                "Description": "Add new row example"
+            }
+        );
+    const res = await axios.post("https://httpbin.org/post", json, {
+      headers: {
+        // Overwrite Axios's automatically set Content-Type
+        'Content-Type': 'application/json'
+      }
+    });
+    
+    res.data.data;
+    console.log(res.data.data);
+}
+```
 
 ## Troubleshooting
 
-If you run into any issues not listed here, please [open a ticket](https://github.com/orca-scan/orca-webhook-python/issues).
+If you run into any issues not listed here, please [open a ticket](https://github.com/orca-scan/orca-webhook-node/issues).
 
 ## Examples in other langauges
 * [orca-webhook-dotnet](https://github.com/orca-scan/orca-webhook-dotnet)
 * [orca-webhook-python](https://github.com/orca-scan/orca-webhook-python)
 * [orca-webhook-go](https://github.com/orca-scan/orca-webhook-go)
+* [orca-webhook-java](https://github.com/orca-scan/orca-webhook-java)
+* [orca-webhook-php](https://github.com/orca-scan/orca-webhook-php)
 
 ## History
 
