@@ -1,6 +1,6 @@
 # orca-webhook-node
 
-Example of how to build an [Orca Scan WebHook](https://orcascan.com/docs/api/webhooks) endpoint in using [NodeJS](https://nodejs.org/) and [express](https://expressjs.com/) framework.
+Example of how to build an [Orca Scan WebHook](https://orcascan.com/docs/api/webhooks) endpoint and [Orca Scan WebHook In](https://orcascan.com/guides/how-to-update-orca-scan-from-your-system-4b249706) using [NodeJS](https://nodejs.org/) and [express](https://expressjs.com/) framework.
 
 ## Install
 
