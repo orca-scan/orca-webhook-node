@@ -5,7 +5,7 @@ const app = express();
 // Parse JSON bodies for this app.
 app.use(express.json());
 
-app.post('*', function(request, response){
+app.post('/orca-webhook-out', function(request, response){
     data = request.body;
 
     // dubug purpose: show in console raw data received
@@ -59,10 +59,12 @@ async function webhook_in(){
         'Content-Type': 'application/json'
       }
     });
-    
-    res.data.data;
-    console.log(res.data.data);
+    console.log(res.statusText);
 }
 
-webhook_in()
+app.get('/trigger-webhook-in', function(request, response){
+    webhook_in();
+    response.sendStatus(200);
+});
+
 app.listen(3000, () => console.log('Example app is listening on port 3000.'));

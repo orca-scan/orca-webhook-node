@@ -31,7 +31,7 @@ Your WebHook receiver will now be running on port 3000.
 You can emulate an Orca Scan WebHook using [cURL](https://dev.to/ibmdeveloper/what-is-curl-and-why-is-it-all-over-api-docs-9mh) by running the following:
 
 ```bash
-curl --location --request POST 'http://127.0.0.1:3000' \
+curl --location --request POST 'http://127.0.0.1:3000/orca-webhook-out' \
 --header 'Content-Type: application/json' \
 --data-raw '{
     "___orca_action": "add",
@@ -67,7 +67,7 @@ const app = express();
 // Parse JSON bodies for this app.
 app.use(express.json());
 
-app.post('*', function(request, response){
+app.post('/orca-webhook-out', function(request, response){
     data = request.body;
 
     // dubug purpose: show in console raw data received
@@ -132,6 +132,16 @@ async function webhook_in(){
     res.data.data;
     console.log(res.data.data);
 }
+```
+
+Use `http://127.0.0.1:3000/trigger-webhook-in` to trigget the in webhook and send the request.
+
+## Test server locally on Orca Cloud
+
+To expose the server securely from localhost and test it easily on the real Orca Cloud environment you can use [Secure Tunnels](https://ngrok.com/docs/secure-tunnels#what-are-ngrok-secure-tunnels). Take a look at [Ngrok](https://ngrok.com/) or [Cloudflare](https://www.cloudflare.com/).
+
+```bash
+ngrok http 5000
 ```
 
 ## Troubleshooting
