@@ -41,29 +41,25 @@ app.post('/orca-webhook-out', function(request, response){
     response.sendStatus(200);
 });
 
-async function webhook_in(){
+app.get('/trigger-webhook-in', function(request, response){
     // The following example adds a new row to a sheet, setting the value of Barcode, Name, Quantity and Description
-    // TODO: change url to https://api.orcascan.com/sheets/{id}
     const json = JSON.stringify(
-            { 
-                "___orca_action": "add",
-                "Barcode": "0123456789",
-                "Name": "New 1",
-                "Quantity": 12,
-                "Description": "Add new row example"
-            }
-        );
+        { 
+            "___orca_action": "add",
+            "Barcode": "0123456789",
+            "Name": "New 1",
+            "Quantity": 12,
+            "Description": "Add new row example"
+        }
+    );
+    // TODO: change url to https://api.orcascan.com/sheets/{id}
     const res = await axios.post("https://httpbin.org/post", json, {
-      headers: {
+    headers: {
         // Overwrite Axios's automatically set Content-Type
         'Content-Type': 'application/json'
-      }
+    }
     });
     console.log(res.statusText);
-}
-
-app.get('/trigger-webhook-in', function(request, response){
-    webhook_in();
     response.sendStatus(200);
 });
 
