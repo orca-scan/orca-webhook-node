@@ -135,9 +135,9 @@ app.get('/trigger-webhook-in', function(request, response){
 
 Use `http://127.0.0.1:3000/trigger-webhook-in` to trigget the in webhook and send the request.
 
-## Test server locally on Orca Cloud
+## Test server locally against Orca Cloud
 
-To expose the server securely from localhost and test it easily on the real Orca Cloud environment you can use [Secure Tunnels](https://ngrok.com/docs/secure-tunnels#what-are-ngrok-secure-tunnels). Take a look at [Ngrok](https://ngrok.com/) or [Cloudflare](https://www.cloudflare.com/).
+To expose the server securely from localhost and test it easily against the real Orca Cloud environment you can use [Secure Tunnels](https://ngrok.com/docs/secure-tunnels#what-are-ngrok-secure-tunnels). Take a look at [Ngrok](https://ngrok.com/) or [Cloudflare](https://www.cloudflare.com/).
 
 ```bash
 ngrok http 3000
