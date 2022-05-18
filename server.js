@@ -8,7 +8,7 @@ app.use(express.json());
 app.post('/orca-webhook-out', function(request, response){
     data = request.body;
 
-    // dubug purpose: show in console raw data received
+    // debug purpose: show in console raw data received
     console.log("Request received: \n"+JSON.stringify(data, null, 2));
 
     // get the name of the action that triggered this request (add, update, delete, test)
@@ -41,7 +41,7 @@ app.post('/orca-webhook-out', function(request, response){
     response.sendStatus(200);
 });
 
-app.get('/trigger-webhook-in', function(request, response){
+app.get('/trigger-webhook-in', async function(request, response){
     // The following example adds a new row to a sheet, setting the value of Barcode, Name, Quantity and Description
     const json = JSON.stringify(
         { 

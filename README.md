@@ -4,7 +4,12 @@ Example of how to build an [Orca Scan WebHook](https://orcascan.com/docs/api/web
 
 ## Install
 
-First ensure you have [NodeJS](https://nodejs.org/) installed:
+First ensure you have [Node.js](https://nodejs.org/) installed:
+
+```bash
+# should return 11 or higher
+node -v
+```
 
 Then execute the following:
 
@@ -70,7 +75,7 @@ app.use(express.json());
 app.post('/orca-webhook-out', function(request, response){
     data = request.body;
 
-    // dubug purpose: show in console raw data received
+    // debug purpose: show in console raw data received
     console.log("Request received: \n"+JSON.stringify(data, null, 2));
 
     // get the name of the action that triggered this request (add, update, delete, test)
@@ -110,7 +115,7 @@ app.listen(3000, () => console.log('Example app is listening on port 3000.'));
 [Orca Scan WebHook In](https://orcascan.com/guides/how-to-update-orca-scan-from-your-system-4b249706)
 
 ```js
-app.get('/trigger-webhook-in', function(request, response){
+app.get('/trigger-webhook-in', async function(request, response){
     // The following example adds a new row to a sheet, setting the value of Barcode, Name, Quantity and Description
     const json = JSON.stringify(
         { 
