@@ -15,7 +15,7 @@ Server runs on port **8080**.
 
 ## Webhook Out
 
-Orca Scan POSTs JSON to `POST /orca-webhook-out` when a row is added, updated, or deleted.
+Orca Scan POSTs JSON to `POST /orca-webhook-out` when a row is added, updated, or deleted. See the [Webhook Out guide](https://orcascan.com/guides/updating-your-system-data-when-a-barcode-is-scanned-da8bbe42) for full details including [security headers](https://orcascan.com/guides/updating-your-system-data-when-a-barcode-is-scanned-da8bbe42#security), [import](https://orcascan.com/guides/updating-your-system-data-when-a-barcode-is-scanned-da8bbe42#what-information-does-orca-scan-send-when-i-import-data) and [clear](https://orcascan.com/guides/updating-your-system-data-when-a-barcode-is-scanned-da8bbe42#what-information-does-orca-scan-send-when-i-clear-data) events.
 
 **System fields** (always present):
 
@@ -53,11 +53,13 @@ curl --location --request POST 'http://127.0.0.1:8080/orca-webhook-out' \
 
 ## Webhook In
 
-Trigger `GET /trigger-webhook-in` to push a row update to Orca Scan. Update the URL in [server.js](server.js) to point to your sheet:
+Trigger `GET /trigger-webhook-in` to push a row update to Orca Scan via the [Webhook In API](https://orcascan.com/guides/updating-orca-scan-data-from-your-system-4b249706). Update the URL in [server.js](server.js) to point to your sheet:
 
 ```
 https://api.orcascan.com/sheets/{id}
 ```
+
+See the [REST API docs](https://orcascan.com/guides/barcode-scanning-rest-api-f09a21c3) for all available endpoints.
 
 ## Test against Orca Cloud
 
@@ -67,7 +69,7 @@ Use [localtunnel](https://github.com/localtunnel/localtunnel) to expose your loc
 npx localtunnel --port 8080
 ```
 
-Then set the tunnel URL as your Webhook Out endpoint in the Orca Scan app.
+Then [add the tunnel URL as your Webhook Out endpoint](https://orcascan.com/guides/updating-your-system-data-when-a-barcode-is-scanned-da8bbe42#how-do-i-add-a-webhook-out-url-to-my-sheet) in the Orca Scan app.
 
 ## Troubleshooting
 
