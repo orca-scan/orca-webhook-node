@@ -83,10 +83,6 @@ Then [add the tunnel URL as your Webhook Out endpoint](https://orcascan.com/guid
 * [orca-webhook-java](https://github.com/orca-scan/orca-webhook-java)
 * [orca-webhook-php](https://github.com/orca-scan/orca-webhook-php)
 
-## History
-
-For change-log, check [releases](https://github.com/orca-scan/orca-webhook-node/releases).
-
 ## License
 
 &copy; Orca Scan, the [Barcode Scanner app for iOS and Android](https://orcascan.com).
