@@ -1,6 +1,6 @@
 # orca-webhook-node
 
-Example of how to receive an [Orca Scan Webhook Out](https://orcascan.com/docs/api/webhooks) and trigger an [Orca Scan Webhook In](https://orcascan.com/guides/how-to-update-orca-scan-from-your-system-4b249706) using [Node.js](https://nodejs.org/) and [Express](https://expressjs.com/).
+Example of how to receive an Orca Scan [WebHook Out](https://orcascan.com/guides/updating-your-system-data-when-a-barcode-is-scanned-da8bbe42) and trigger an [WebHook In](https://orcascan.com/guides/how-to-update-orca-scan-from-your-system-4b249706) using [Node.js](https://nodejs.org/) and [Express](https://expressjs.com/).
 
 ## Quick start
 
@@ -71,7 +71,7 @@ Then set the tunnel URL as your Webhook Out endpoint in the Orca Scan app.
 
 ## Troubleshooting
 
-[Chat to use live](https://orcascan.com/#chat) if you run into any issues.
+[Chat to us live](https://orcascan.com/#chat) if you run into any issues.
 
 ## Examples in other languages
 
