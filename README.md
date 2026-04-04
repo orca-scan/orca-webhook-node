@@ -1,45 +1,39 @@
 # orca-webhook-node
 
-Example of how to build an [Orca Scan WebHook](https://orcascan.com/docs/api/webhooks) endpoint and [Orca Scan WebHook In](https://orcascan.com/guides/how-to-update-orca-scan-from-your-system-4b249706) using [NodeJS](https://nodejs.org/) and [express](https://expressjs.com/) framework.
+Example of how to receive an [Orca Scan Webhook Out](https://orcascan.com/docs/api/webhooks) and trigger an [Orca Scan Webhook In](https://orcascan.com/guides/how-to-update-orca-scan-from-your-system-4b249706) using [Node.js](https://nodejs.org/) and [Express](https://expressjs.com/).
 
-## Install
-
-First ensure you have [Node.js](https://nodejs.org/) installed:
+## Quick start
 
 ```bash
-# should return 11 or higher
-node -v
-```
-
-Then execute the following:
-
-```bash
-# download this example code
 git clone https://github.com/orca-scan/orca-webhook-node.git
-
-# go into the new directory
 cd orca-webhook-node
-
-# install dependencies
 npm install
-```
-
-## Run
-
-```bash
-# start the project
 npm start
 ```
 
-Your WebHook receiver will now be running on port 3000.
+Server runs on port **8080**.
 
-You can emulate an Orca Scan WebHook using [cURL](https://dev.to/ibmdeveloper/what-is-curl-and-why-is-it-all-over-api-docs-9mh) by running the following:
+## Webhook Out
+
+Orca Scan POSTs JSON to `POST /orca-webhook-out` when a row is added, updated, or deleted.
+
+**System fields** (always present):
+
+| Field | Description |
+|---|---|
+| `___orca_event` | Event type: `rows:add`, `rows:update`, `rows:delete`, `test` |
+| `___orca_sheet_name` | Name of the sheet that triggered the event |
+| `___orca_user_email` | Email of the user (only over HTTPS) |
+
+All other fields map directly to your sheet column names _(case and space sensitive)_.
+
+Test it locally with cURL:
 
 ```bash
-curl --location --request POST 'http://127.0.0.1:3000/orca-webhook-out' \
+curl --location --request POST 'http://127.0.0.1:8080/orca-webhook-out' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "___orca_action": "add",
+    "___orca_event": "rows:add",
     "___orca_sheet_name": "Vehicle Checks",
     "___orca_user_email": "hidden@requires.https",
     "___orca_row_id": "5cf5c1efc66a9681047a0f3d",
@@ -55,110 +49,37 @@ curl --location --request POST 'http://127.0.0.1:3000/orca-webhook-out' \
 }'
 ```
 
-### Important things to note
+> Webhooks are never retried, regardless of the HTTP response.
 
-1. Only Orca Scan system fields start with `___`
-2. Properties in the JSON payload are an exact match to the  field names in your sheet _(case and space)_
-3. WebHooks are never retried, regardless of the HTTP response
+## Webhook In
 
-## How this example works
+Trigger `GET /trigger-webhook-in` to push a row update to Orca Scan. Update the URL in [server.js](server.js) to point to your sheet:
 
-This [example](server.js) uses the [express](https://expressjs.com/) framework:
-
-```js
-const express = require('express');
-
-const app = express();
-// Parse JSON bodies for this app.
-app.use(express.json());
-
-app.post('/orca-webhook-out', function(request, response){
-    data = request.body;
-
-    // debug purpose: show in console raw data received
-    console.log("Request received: \n"+JSON.stringify(data, null, 2));
-
-    // get the name of the action that triggered this request (add, update, delete, test)
-    const action = data.___orca_action
-
-    // get the name of the sheet this action impacts
-    const sheetName = data.___orca_sheet_name
-
-    // get the email of the user who preformed the action (empty if not HTTPS)
-    const userEmail = data.___orca_user_email
-
-    // NOTE:
-    // orca system fields start with ___
-    // you can access the value of each field using the field name (data.Name, data.Barcode, data.Location)
-    switch (action) {
-        case "add":
-            // TODO: do something when a row has been added
-            break;
-        case "update":
-            // TODO: do something when a row has been updated
-            break;
-        case "delete":
-            // TODO: do something when a row has been deleted
-            break;
-        case "test":
-            // TODO: do something when the user in the web app hits the test button
-            break;
-      }
-
-    response.sendStatus(200);
-});
-
-app.listen(3000, () => console.log('Example app is listening on port 3000.'));
 ```
-### WebHook In 
-
-[Orca Scan WebHook In](https://orcascan.com/guides/how-to-update-orca-scan-from-your-system-4b249706)
-
-```js
-app.get('/trigger-webhook-in', async function(request, response){
-    // The following example adds a new row to a sheet, setting the value of Barcode, Name, Quantity and Description
-    const json = JSON.stringify(
-        { 
-            "___orca_action": "add",
-            "Barcode": "0123456789",
-            "Name": "New 1",
-            "Quantity": 12,
-            "Description": "Add new row example"
-        }
-    );
-    // TODO: change url to https://api.orcascan.com/sheets/{id}
-    const res = await axios.post("https://httpbin.org/post", json, {
-    headers: {
-        // Overwrite Axios's automatically set Content-Type
-        'Content-Type': 'application/json'
-    }
-    });
-    console.log(res.statusText);
-    response.sendStatus(200);
-});
+https://api.orcascan.com/sheets/{id}
 ```
 
-Use `http://127.0.0.1:3000/trigger-webhook-in` to trigget the in webhook and send the request.
+## Test against Orca Cloud
 
-## Test server locally against Orca Cloud
-
-To expose the server securely from localhost and test it easily against the real Orca Cloud environment you can use [Secure Tunnels](https://ngrok.com/docs/secure-tunnels#what-are-ngrok-secure-tunnels). Take a look at [Ngrok](https://ngrok.com/) or [Cloudflare](https://www.cloudflare.com/).
+Use [localtunnel](https://github.com/localtunnel/localtunnel) to expose your local server:
 
 ```bash
-ngrok http 3000
+npx localtunnel --port 8080
 ```
+
+Then set the tunnel URL as your Webhook Out endpoint in the Orca Scan app.
 
 ## Troubleshooting
 
-If you run into any issues not listed here, please [open a ticket](https://github.com/orca-scan/orca-webhook-node/issues).
+[Chat to use live](https://orcascan.com/#chat) if you run into any issues.
 
-## Examples in other langauges
+## Examples in other languages
+
 * [orca-webhook-dotnet](https://github.com/orca-scan/orca-webhook-dotnet)
 * [orca-webhook-python](https://github.com/orca-scan/orca-webhook-python)
 * [orca-webhook-go](https://github.com/orca-scan/orca-webhook-go)
 * [orca-webhook-java](https://github.com/orca-scan/orca-webhook-java)
 * [orca-webhook-php](https://github.com/orca-scan/orca-webhook-php)
-* [orca-webhook-node](https://github.com/orca-scan/orca-webhook-node)
 
 ## History
 
