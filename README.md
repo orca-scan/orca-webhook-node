@@ -1,6 +1,6 @@
 # orca-webhook-node
 
-Example of how to receive an Orca Scan [WebHook Out](https://orcascan.com/guides/updating-your-system-data-when-a-barcode-is-scanned-da8bbe42) and trigger an [WebHook In](https://orcascan.com/guides/how-to-update-orca-scan-from-your-system-4b249706) using [Node.js](https://nodejs.org/) and [Express](https://expressjs.com/).
+Example Node.js app for receiving Orca Scan [WebHook Out](https://orcascan.com/guides/updating-your-system-data-when-a-barcode-is-scanned-da8bbe42) and sending [WebHook In](https://orcascan.com/guides/how-to-update-orca-scan-from-your-system-4b249706) requests.
 
 ## Quick start
 
