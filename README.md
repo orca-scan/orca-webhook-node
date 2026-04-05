@@ -27,7 +27,7 @@ Orca Scan POSTs JSON to `POST /orca-webhook-out` when a row is added, updated, o
 
 All other fields map directly to your sheet column names _(case and space sensitive)_.
 
-Test it locally with cURL:
+**Test it using cURL:**
 
 ```bash
 curl --location --request POST 'http://127.0.0.1:8080/orca-webhook-out' \
@@ -51,6 +51,16 @@ curl --location --request POST 'http://127.0.0.1:8080/orca-webhook-out' \
 
 > Webhooks are never retried, regardless of the HTTP response.
 
+**Test it using Orca Scan:**
+
+Use [localtunnel](https://github.com/localtunnel/localtunnel) to expose your local server:
+
+```bash
+npx localtunnel --port 8888
+```
+
+Then [add the tunnel URL as your Webhook Out endpoint](https://orcascan.com/guides/capture-barcode-scan-events-with-webhooks-da8bbe42#how-to-set-up-a-webhook-out-url) in the Orca Scan web app.
+
 ## Webhook In
 
 Trigger `GET /trigger-webhook-in` to push a row update to Orca Scan via the [Webhook In API](https://orcascan.com/guides/updating-orca-scan-data-from-your-system-4b249706). Update the URL in [server.js](server.js) to point to your sheet:
@@ -60,16 +70,6 @@ https://api.orcascan.com/sheets/{id}
 ```
 
 See the [REST API docs](https://orcascan.com/guides/barcode-scanning-rest-api-f09a21c3) for all available endpoints.
-
-## Test against Orca Scan
-
-Use [localtunnel](https://github.com/localtunnel/localtunnel) to expose your local server:
-
-```bash
-npx localtunnel --port 8888
-```
-
-Then [add the tunnel URL as your Webhook Out endpoint](https://orcascan.com/guides/capture-barcode-scan-events-with-webhooks-da8bbe42#how-to-set-up-a-webhook-out-url) in the Orca Scan web app.
 
 ## Troubleshooting
 
