@@ -11,7 +11,7 @@ npm install
 npm start
 ```
 
-Server runs on port **8080**.
+Server runs on port **8888**.
 
 ## Webhook Out
 
