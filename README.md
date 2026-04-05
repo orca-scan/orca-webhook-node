@@ -61,7 +61,7 @@ https://api.orcascan.com/sheets/{id}
 
 See the [REST API docs](https://orcascan.com/guides/barcode-scanning-rest-api-f09a21c3) for all available endpoints.
 
-## Test against Orca Cloud
+## Test against Orca Scan
 
 Use [localtunnel](https://github.com/localtunnel/localtunnel) to expose your local server:
 
@@ -69,7 +69,7 @@ Use [localtunnel](https://github.com/localtunnel/localtunnel) to expose your loc
 npx localtunnel --port 8888
 ```
 
-Then [add the tunnel URL as your Webhook Out endpoint](https://orcascan.com/guides/updating-your-system-data-when-a-barcode-is-scanned-da8bbe42#how-do-i-add-a-webhook-out-url-to-my-sheet) in the Orca Scan app.
+Then [add the tunnel URL as your Webhook Out endpoint]([https://orcascan.com/guides/updating-your-system-data-when-a-barcode-is-scanned-da8bbe42#how-do-i-add-a-webhook-out-url-to-my-sheet](https://orcascan.com/guides/capture-barcode-scan-events-with-webhooks-da8bbe42#how-to-set-up-a-webhook-out-url)) in the Orca Scan web app.
 
 ## Troubleshooting
 
