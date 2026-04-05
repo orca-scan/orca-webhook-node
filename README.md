@@ -66,7 +66,7 @@ See the [REST API docs](https://orcascan.com/guides/barcode-scanning-rest-api-f0
 Use [localtunnel](https://github.com/localtunnel/localtunnel) to expose your local server:
 
 ```bash
-npx localtunnel --port 8080
+npx localtunnel --port 8888
 ```
 
 Then [add the tunnel URL as your Webhook Out endpoint](https://orcascan.com/guides/updating-your-system-data-when-a-barcode-is-scanned-da8bbe42#how-do-i-add-a-webhook-out-url-to-my-sheet) in the Orca Scan app.
