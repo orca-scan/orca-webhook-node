@@ -69,7 +69,7 @@ Use [localtunnel](https://github.com/localtunnel/localtunnel) to expose your loc
 npx localtunnel --port 8888
 ```
 
-Then [add the tunnel URL as your Webhook Out endpoint]([https://orcascan.com/guides/updating-your-system-data-when-a-barcode-is-scanned-da8bbe42#how-do-i-add-a-webhook-out-url-to-my-sheet](https://orcascan.com/guides/capture-barcode-scan-events-with-webhooks-da8bbe42#how-to-set-up-a-webhook-out-url)) in the Orca Scan web app.
+Then [add the tunnel URL as your Webhook Out endpoint](https://orcascan.com/guides/capture-barcode-scan-events-with-webhooks-da8bbe42#how-to-set-up-a-webhook-out-url) in the Orca Scan web app.
 
 ## Troubleshooting
 
