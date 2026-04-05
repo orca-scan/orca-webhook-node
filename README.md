@@ -1,6 +1,6 @@
 # orca-webhook-node
 
-Connect [Orca Scan](https://orcascan.com) to your own system using webhooks. When a user scans a barcode and adds, updates, or deletes a row, Orca Scan sends the data to your server in real-time — no polling, no manual exports.
+Connect [Orca Scan](https://orcascan.com) to your own system using webhooks. When a user scans a barcode and adds, updates, or deletes a row, Orca Scan sends the data to your server in real-time - no polling, no manual exports.
 
 This Node.js example shows you how to:
 
